@@ -6,17 +6,16 @@ Created on Wed Mar 04 07:08:30 2015
 """
 
 import numpy as np
-from voytoys.signal_pac import my_pac
+from neurosrc.spectral.signal_pac import my_pac
 from NeuroTools import stgen
 import matplotlib.pyplot as plt
-import h5py
 
 # Network parameters
 finame = 'pac_mc.hdf5'
 Nneu = 100 # Number of neurons
 spikeHz_baseline1 = np.arange(20) # Firing rate of a neuron (Hz) at baseline
-spikeHz_baseline = np.append(spikeHz_baseline1,[19.1,19.2,19.3,19.4,19.5,19.6,19.7,19.8,19.9,19.99,19.999,19.9999])
-spikeHz_biased = 20 # Extra firing rate of a neuron (Hz) at favored phase
+spikeHz_baseline = np.append(spikeHz_baseline1,[19.1,19.2,19.3,19.4,19.5,19.6,19.7,19.8,19.9])
+spikeHz_biased = 20 # Firing rate of a neuron (Hz) at favored phase
 frac_bias = .2
 dur = 3 # Length of simulation (s)
 flo_range = (4, 8)
@@ -88,19 +87,6 @@ for e in xrange(E):
     pac_plv[e] = my_pac(lfp[e], flo_range, fhi_range, rate, 'plv', filt_method, **kwargs) # add **kwargs if desired
     pac_mi[e] = my_pac(lfp[e], flo_range, fhi_range, rate, 'mi', filt_method, **kwargs) # add **kwargs if desired
     pac_glm[e] = my_pac(lfp[e], flo_range, fhi_range, rate, 'glm', filt_method, **kwargs) # add **kwargs if desired
-
-# Save data
-with h5py.File(finame,'w') as fi:
-    fi['Nneu'] = Nneu
-    fi['spikeHz_baseline'] = spikeHz_baseline
-    fi['spikeHz_biased'] = spikeHz_biased
-    fi['frac_bias'] = frac_bias
-    fi['flo_range'] = flo_range
-    fi['fhi_range'] = fhi_range
-    fi['lfp'] = lfp
-    fi['pac_plv'] = pac_plv
-    fi['pac_glm'] = pac_glm
-    fi['pac_mi'] = pac_mi
     
 # Visualize relationships between metrics
 plt.figure()

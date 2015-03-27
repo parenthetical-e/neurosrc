@@ -6,7 +6,7 @@ Created on Wed Feb 04 15:20:56 2015
 """
 
 import numpy as np
-from voytoys.scott.signal_filter import my_filter
+from neurosrc.spectral.signal_filter import my_filter
 
 import math
 import statsmodels.api as sm
