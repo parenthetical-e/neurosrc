@@ -1,7 +1,3 @@
-*Under construction*
-
-In the future, I will better structure and document my code
-
 # neurosrc
 
 This repo contains tools and tutorials that I've developed during my research at UCSD
@@ -13,4 +9,7 @@ that I've used to analyse electrocorticography recordings.
 
 * `sim_PACoutput.py` - Comparison of phase-amplitude coupling estimation techniques on simulated data
 
-## Coming soon: Simulated neural networks
+## chanTimeReject
+
+This submodule contains a function to automatically remove bad channels and time periods
+from multi-channel electrophysiological recordings
