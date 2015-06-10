@@ -6,7 +6,7 @@ Created on Wed Mar 04 07:08:30 2015
 """
 
 import numpy as np
-from neurosrc.spectral.signal_pac import my_pac
+from neurosrc.spectral.pac import pacfn
 from NeuroTools import stgen
 import matplotlib.pyplot as plt
 
@@ -84,9 +84,9 @@ pac_plv = np.zeros(E)
 pac_mi = np.zeros(E)
 pac_glm = np.zeros(E)
 for e in xrange(E):
-    pac_plv[e] = my_pac(lfp[e], flo_range, fhi_range, rate, 'plv', filt_method, **kwargs) # add **kwargs if desired
-    pac_mi[e] = my_pac(lfp[e], flo_range, fhi_range, rate, 'mi', filt_method, **kwargs) # add **kwargs if desired
-    pac_glm[e] = my_pac(lfp[e], flo_range, fhi_range, rate, 'glm', filt_method, **kwargs) # add **kwargs if desired
+    pac_plv[e] = pacfn(lfp[e], flo_range, fhi_range, rate, 'plv', filt_method, **kwargs) # add **kwargs if desired
+    pac_mi[e] = pacfn(lfp[e], flo_range, fhi_range, rate, 'mi', filt_method, **kwargs) # add **kwargs if desired
+    pac_glm[e] = pacfn(lfp[e], flo_range, fhi_range, rate, 'glm', filt_method, **kwargs) # add **kwargs if desired
     
 # Visualize relationships between metrics
 plt.figure()

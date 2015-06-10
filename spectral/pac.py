@@ -6,12 +6,12 @@ Created on Wed Feb 04 15:20:56 2015
 """
 
 import numpy as np
-from neurosrc.spectral.signal_filter import my_filter
+from neurosrc.spectral.filter import scfilter
 
 import math
 import statsmodels.api as sm
 
-def my_pac(x, flo_range, fhi_range, rate, pac_method, filt_method, **kwargs):
+def scpac(x, flo_range, fhi_range, rate, pac_method, filt_method, **kwargs):
     '''
     Calculate phase-amplitude coupling between the phase of a low-frequency-
     bandpass filtered signal and the amplitude of a high-frequency-bandpass 
@@ -45,13 +45,13 @@ def my_pac(x, flo_range, fhi_range, rate, pac_method, filt_method, **kwargs):
     '''
     
     # Bandpass filter raw signal
-    xlo = my_filter(x, flo_range, filt_method, rate = rate, **kwargs)
-    xhi = my_filter(x, fhi_range, filt_method, rate = rate, **kwargs)
+    xlo = scfilter(x, flo_range, filt_method, rate = rate, **kwargs)
+    xhi = scfilter(x, fhi_range, filt_method, rate = rate, **kwargs)
     
     #Calculate PAC
     if pac_method == 'plv':
         ahi = np.abs(fasthilbert(xhi))
-        xlo_ahi = my_filter(ahi, flo_range, filt_method, **kwargs)
+        xlo_ahi = scfilter(ahi, flo_range, filt_method, **kwargs)
         pac = pac_plv(xlo, xlo_ahi)
     elif pac_method == 'mi':
         pac = pac_mi(xlo, xhi)
@@ -239,6 +239,6 @@ def pac_palette(x, pac_method, filt_method, rate = 1000,
         for a in range(A):
             #print p,a
             fhi = [f_amps[a],f_amps[a]+da]
-            pac[p,a] = my_pac(x, flo, fhi, rate, pac_method, filt_method, **kwargs)
+            pac[p,a] = scpac(x, flo, fhi, rate, pac_method, filt_method, **kwargs)
     
     return pac

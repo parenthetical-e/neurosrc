@@ -1,13 +1,8 @@
 # -*- coding: utf-8 -*-
-"""
-Created on Mon Feb 16 08:56:34 2015
-
-@author: Scott
-"""
 import numpy as np
 from scipy.signal import butter, filtfilt, firwin, firwin2, kaiserord
 
-def my_filter(x, f_range, method, rate = 1000, **kwargs):
+def scfilter(x, f_range, method, rate = 1000, **kwargs):
     '''
     Filter a time series with the desired method and parameters
     
